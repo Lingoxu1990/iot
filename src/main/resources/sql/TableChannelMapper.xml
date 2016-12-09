@@ -266,4 +266,8 @@
     from table_channel
     where table_device_guid = #{table_device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByGuidAndAccountId" parameterType="com.iot.pojo.TableChannel">
+    delete from table_channel
+    where channel_guid = #{channel_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
+  </delete>
 </mapper>

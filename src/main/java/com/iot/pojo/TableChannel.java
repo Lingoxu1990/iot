@@ -365,24 +365,6 @@ public class TableChannel {
         this.gateway_id = gateway_id;
     }
 
-    @Override
-    public String toString() {
-        return "TableChannel{" +
-                "id='" + id + '\'' +
-                ", channel_guid='" + channel_guid + '\'' +
-                ", table_device_guid='" + table_device_guid + '\'' +
-                ", device_name='" + device_name + '\'' +
-                ", channel_class='" + channel_class + '\'' +
-                ", channel_number='" + channel_number + '\'' +
-                ", channel_name='" + channel_name + '\'' +
-                ", channel_type='" + channel_type + '\'' +
-                ", channel_bit_num='" + channel_bit_num + '\'' +
-                ", channel_in_out='" + channel_in_out + '\'' +
-                ", account_id='" + account_id + '\'' +
-                ", gateway_id='" + gateway_id + '\'' +
-                '}';
-    }
-
     private String device_value;
     private String channel_value;
 
@@ -403,4 +385,23 @@ public class TableChannel {
     }
 
 
+    @Override
+    public String toString() {
+        return "TableChannel{" +
+                "id='" + id + '\'' +
+                ", channel_guid='" + channel_guid + '\'' +
+                ", table_device_guid='" + table_device_guid + '\'' +
+                ", device_name='" + device_name + '\'' +
+                ", channel_class='" + channel_class + '\'' +
+                ", channel_number='" + channel_number + '\'' +
+                ", channel_name='" + channel_name + '\'' +
+                ", channel_type='" + channel_type + '\'' +
+                ", channel_bit_num='" + channel_bit_num + '\'' +
+                ", channel_in_out='" + channel_in_out + '\'' +
+                ", account_id='" + account_id + '\'' +
+                ", gateway_id='" + gateway_id + '\'' +
+                ", device_value='" + device_value + '\'' +
+                ", channel_value='" + channel_value + '\'' +
+                '}';
+    }
 }

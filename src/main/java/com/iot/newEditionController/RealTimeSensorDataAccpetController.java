@@ -7,6 +7,7 @@ import com.iot.message.Message;
 import com.iot.message.MessageNoContent;
 import com.iot.newEditionService.RealTimeSensorDataAccpetService;
 import com.iot.newEditionService.RecipeService;
+import com.iot.pojo.TableChannel;
 import com.iot.pojo.TableDevice;
 import com.iot.pojo.TableSensorRecord;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -128,9 +129,9 @@ public class RealTimeSensorDataAccpetController {
         return messageNoContent;
     }
 
-    @RequestMapping(value = "/upload/basis",method = RequestMethod.POST)
+    @RequestMapping(value = "/upload/deviceInfo",method = RequestMethod.POST)
     @ResponseBody
-    public Object updateBasisData(HttpServletRequest httpServletRequest) throws Exception{
+    public Object updateDeviceData(HttpServletRequest httpServletRequest) throws Exception{
         Message message = new Message();
         BufferedReader in = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), "utf-8"));
         String line = "";
@@ -145,19 +146,58 @@ public class RealTimeSensorDataAccpetController {
         }catch (Exception e){
             e.printStackTrace();
             message.setCode("-1");
-            message.setMessage("replcae error");
+            message.setMessage("device replcae error");
             message.setContent(e.getMessage());
             return message;
         }
         if (num!=(tableDeviceList.size())){
             message.setCode("-1");
-            message.setMessage("execute error");
+            message.setMessage("device execute error");
             message.setContent("this operation is not executed as expected.");
             return message;
         }
         MessageNoContent messageNoContent = new MessageNoContent();
         messageNoContent.setCode("0");
-        messageNoContent.setMessage("success");
+        messageNoContent.setMessage("device replace success");
+        return messageNoContent;
+    }
+    @RequestMapping(value = "/upload/classInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateClassData(HttpServletRequest httpServletRequest) throws Exception{
+        Message message = new Message();
+        BufferedReader in = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), "utf-8"));
+        String line = "";
+        String empline = "";
+        while ((line = in.readLine()) != null) {
+            empline += line;
+        }
+        System.out.println(empline);
+        List<TableChannel>  tableDeviceList = JSONArray.parseArray(empline, TableChannel.class);
+
+        for (TableChannel t:tableDeviceList) {
+            System.out.println(t.toString());
+        }
+
+        int num=0;
+
+        try{
+            num = realTimeSensorDataAccpetService.replaceclassMany(tableDeviceList);
+        }catch (Exception e){
+            e.printStackTrace();
+            message.setCode("-1");
+            message.setMessage("channel replcae error");
+            message.setContent(e.getMessage());
+            return message;
+        }
+        if (num!=(tableDeviceList.size())){
+            message.setCode("-1");
+            message.setMessage("channel execute error");
+            message.setContent("this operation is not executed as expected.");
+            return message;
+        }
+        MessageNoContent messageNoContent = new MessageNoContent();
+        messageNoContent.setCode("0");
+        messageNoContent.setMessage("channel replace success");
         return messageNoContent;
     }
 }

@@ -53,20 +53,18 @@ public interface TableChannelMapper {
      */
     int updateByPrimaryKey(TableChannel record);
 
-
     List<TableChannel> selectByDeviceGuid(TableChannel record);
 
     List<TableChannel> selectByDevice_idAndAccout_idAndGateway_id(TableChannel record);
 
-
     List<TableChannel> selectChannelInfo(TableChannel record);
-
-
 
     List<TableChannel> selectByDevice_guidAndAccout_idAndGateway_id(TableChannel record);
 
     List<TableChannel> selectByDeviceGuidAndAccountId(TableChannel record);
 
     TableChannel selectByDeselectByChannelGuidAndAccount_idAndGateway_id(TableChannel record);
+
+    int deleteByGuidAndAccountId(TableChannel record);
 
 }
