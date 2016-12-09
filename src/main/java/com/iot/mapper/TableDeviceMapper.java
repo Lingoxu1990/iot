@@ -81,4 +81,6 @@ public interface TableDeviceMapper {
     List<TableDevice> selectGatewayOfDevice(String gatewayId);
 
     int updateByDeviceName(TableDevice tableDevice);
+
+    int deleteByGuidAndAccountId(TableDevice tableDevice);
 }

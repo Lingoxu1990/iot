@@ -451,4 +451,24 @@ public class TableDevice {
     public void setRegion_bunding(String region_bunding) {
         this.region_bunding = region_bunding == null ? null : region_bunding.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TableDevice{" +
+                "id='" + id + '\'' +
+                ", device_guid='" + device_guid + '\'' +
+                ", gateway_id='" + gateway_id + '\'' +
+                ", device_addr='" + device_addr + '\'' +
+                ", device_name='" + device_name + '\'' +
+                ", device_id='" + device_id + '\'' +
+                ", device_type='" + device_type + '\'' +
+                ", device_valid='" + device_valid + '\'' +
+                ", device_switch='" + device_switch + '\'' +
+                ", device_value='" + device_value + '\'' +
+                ", device_delay='" + device_delay + '\'' +
+                ", device_register_type='" + device_register_type + '\'' +
+                ", account_id='" + account_id + '\'' +
+                ", region_bunding='" + region_bunding + '\'' +
+                '}';
+    }
 }

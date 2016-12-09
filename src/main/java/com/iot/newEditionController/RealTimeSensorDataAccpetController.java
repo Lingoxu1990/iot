@@ -143,6 +143,7 @@ public class RealTimeSensorDataAccpetController {
         try{
             num = realTimeSensorDataAccpetService.replaceMany(tableDeviceList);
         }catch (Exception e){
+            e.printStackTrace();
             message.setCode("-1");
             message.setMessage("replcae error");
             message.setContent(e.getMessage());

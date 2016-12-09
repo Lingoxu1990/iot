@@ -292,8 +292,6 @@
     where account_id = #{account_id,jdbcType=VARCHAR}
   </select>
 
-
-
   <!---jim-->
   <select id="selectByDevice_guid" parameterType="java.lang.String" resultMap="BaseResultMap">
 
@@ -309,7 +307,6 @@
     from table_device
     where device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
   </select>
-
   <select id="selectByDevice_guidAndAccount_idAndGateway_id" parameterType="java.lang.String" resultMap="BaseResultMap">
 
     select
@@ -317,7 +314,6 @@
     from table_device
     where device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
   </select>
-
   <select id="selectByDevice_guidAndAccount_idAndGateway_idas" parameterType="com.iot.pojo.TableDevice" resultMap="BaseResultMap">
 
     select
@@ -325,7 +321,6 @@
     from table_device
     where device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
   </select>
-
   <update id="updateDevice_guidAndAccount_idAndDevice_addr" parameterType="com.iot.pojo.TableDevice">
     <!--
       WARNING - @mbggenerated
@@ -375,8 +370,6 @@
     </set>
     where device_addr = #{device_addr,jdbcType=VARCHAR} AND device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
   </update>
-
-
   <select id="findTheSensor" parameterType="com.iot.pojo.TableDevice" resultMap="BaseResultMap">
 
     select
@@ -485,5 +478,9 @@
     </set>
     where device_guid = #{device_guid,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteByGuidAndAccountId" parameterType="com.iot.pojo.TableDevice">
+    delete from table_device
+    where device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
+  </delete>
 
 </mapper>
