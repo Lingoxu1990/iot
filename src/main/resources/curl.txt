@@ -1,0 +1,119 @@
+//修改设备名字/数值
+curl -H "Content-Type: application/json" -d '{"device_guid":"1231564456"}' -X PUT http://localhost:8080/device
+
+//控制设备
+curl -H "Content-Type: application/json" -d'{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9",
+"table_device":[
+{"device_guid":"F8B3C33B8DD14741BB90539427111485",
+"device_addr":"fd04:bd3:80e8:3:215:8d00:35:e3a9",
+"device_value":{"channel_number":"1","value":"0"},
+"device_delay":"1",
+"gateway_id":"1234567"
+}]}' -X PUT http://localhost:8080/table_device
+
+//添加设备进区域
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","gateway_id":"02158d00007e170a","table_region_device":[{"region_guid":"f072e0e828764130bd50271474e3fe99","gateway_id":"02158d00007e170a","region_addr":"ff15::9004","region_name":"0516NewRegion","table_device_guid":"8AFD87AD356C4BCD905D7EFDB2604409","gateway_id":"02158d00007e170a","device_addr":"fd04:bd3:80e8:3:215:8d00:32:c4bd","device_name":"00158d000032c4bd"}]}' -X POST http://localhost:8080/region/device
+
+
+
+//查询条件控制集合
+curl http://localhost:8080/device/term?user_id=f1b6be25-8fac-49f4-8234-aece5af717d9
+
+
+//创建控制集合名称
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_cdts_list":[{"cdts_name":"cccccccc","gateway_id":"02158d00007e170a"}]}' -X POST http://localhost:8080/device/term
+
+//为控制集合添加条件
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_conditons":[{"cdts_list_guid":"f15a3373a8b64d968060f715eb5b2015","gateway_id":"02158d00007e170a","table_device_guid":"8A55429FE0BB4F97955338ECDB1D1D32","channel_class":"0111","channel_type":"W","channel_bit_num":" ","compare_val":"200","offset_val":"0"}]}' -X POST http://localhost:8080/device/term/conditions
+
+//为条件集合添加控制序列
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_ctrl_sequence":[{"cdts_list_guid":"f15a3373a8b64d968060f715eb5b2015","gateway_id":"02158d00007e170a","control_number":"1","control_time":"100"}]}' -X POST http://localhost:8080/device/term/sequence
+
+//为条件集合序列添加控制动作
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_control":[{"control_guid":"","ctrl_sqn_guid":"09b3be141c7a4514a744eb8a832d0df6","main_table_name":"table_device","dcgs_guid":"691A13CCE09B46979D58461CF6FDDC10","gateway_id":"02158d00007e170a","m_address":"fd04:bd3:80e8:3:215:8d00:32:c4bd","channel_bit_num":"1","m_value":"00","m_delay":"1"}]}' -X POST http://localhost:8080/device/term/controls
+
+//修改控制集合名称
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_cdts_list":[{"cdts_list_guid":"f15a3373a8b64d968060f715eb5b2015","cdts_name":"xxxxxxx","gateway_id":"02158d00007e170a"}]}' -X PUT http://localhost:8080/device/term
+
+//修改控制集合内部条件
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_conditons":[{"conditions_guid":"91f2281c2e6b405a8c08bd5558f6a189","compare_val":"400","gateway_id":"02158d00007e170a"}]}' -X PUT http://localhost:8080/device/term/conditions
+
+//修改条件集合控制序列
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_ctrl_sequence":[{"ctrl_sqn_guid":"09b3be141c7a4514a744eb8a832d0df6","control_time":"400"}]}' -X PUT http://localhost:8080/device/term/sequence
+
+//修改序列的控制动作
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_control":[{"control_guid":"14a4ac6cfc3745c8b1ebf92c00c5ac38","channel_bit_num":"1","m_value":"ff","m_delay":"1"}]}' -X PUT http://localhost:8080/device/term/controls
+
+//删除条件控制集合
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_cdts_list":[{ "cdts_list_guid":""}],"table_conditons":[{"conditions_guid":""}],"table_ctrl_sequence":[{"ctrl_sqn_guid":""}],"table_control":[{"control_guid":""}]}' -X DELETE http://localhost:8080/device/term
+
+//查询区域的历史传感器数据
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 73feacab-a030-f550-6822-e31365c214ac" "http://localhost:8080/sensor?user_id=f1b6be25-8fac-49f4-8234-aece5af717d9&region_guid=86af533cb5ba4bfeb99d80f155cfb371&gateway_id=02158d00007e170a&start_time=2016-05-09 13:00:00&end_time=2016-05-09 19:00:00&type=history&size=360&region_name=y"
+
+//查询用户的所有设备
+
+//添加场景成员
+curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 001f9530-e386-b0e5-aad2-3ddc50a5dea1" -d '{
+"user_id":"xxxxxxxxx",
+"table_scene_members":[{
+        "table_scene_guid":"639dbd5c89dd49259b157b044b7586aa",
+        "scene_addr":"ff15::a00c",
+        "device_addr":"fd04:bd3:80e8:3:215:8d00:32:c4bd",
+        "device_name":"00158d000032c4bd",
+        "device_value":[{"channel_number":"1","channel_value":"01"}],
+        "device_delay":"1",
+        "device_guid":"D7F6550F21464E1DA89A202CEB7E9BC2",
+        "gateway_id":"02158d00007e170a"
+    }]
+}' "http://localhost:8080/device/scene/scene_members"
+
+
+curl -H "Content-Type: application/json" -d '{"e_mail":"admin","password":"1223456"}' -X POST http://localhost:8080/new/login
+
+
+
+fd04:bd3:80e8:3:215:8d00:32:c4bd
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region_device":[{"region_guid":"93d23c3f-8712-4d6c-b54f-726083bc1486","gateway_id":"00000001007e170a","table_device_guid":"271A213CCFDD44D8AB841F5718BC6A9A","region_addr":"ff15::902e","region_name":"xxxxx","device_addr":"fd04:bd3:80e8:3:215:8d00:8a:1d03","device_name":"123456"}]}' -X POST http://localhost:8080/new/RegionDevice
+添加区域
+region_addr region_name region_switch region_value user_id
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region":[{"gateway_id":"00000001007e170a","region_addr":"ff15::902e","region_name":"aaaaaa"}]}' -X POST http://localhost:8080/new/region
+
+
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region":[{"region_name":"one","gateway_id":"02158d00007e170a"}]}' -X POST http://localhost:8080/region
+删除区域设备
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region_device":[{"region_name":"one","gateway_id":"02158d00007e170a","region_guid":"fe1cf238-81f0-4712-a06b-227f13c9be0a","table_device_guid":"271A213CCFDD44D8AB841F5718BC6A9A"}]}' -X DELETE http://localhost:8080/new/addRegionDevice
+删除区域
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region":[{"gateway_id":"00000001007e170a","region_guid":"1b89e0b4-99c0-4781-a369-ec9fc04025b8"}]}' -X DELETE http://localhost:8080/new/region
+
+
+curl -H "Content-Type: application/json" -d '{"user_id":"f1b6be25-8fac-49f4-8234-aece5af717d9","table_region":[{ "cdts_list_guid":""}],"table_conditons":[{"conditions_guid":""}],"table_ctrl_sequence":[{"ctrl_sqn_guid":""}],"table_control":[{"control_guid":""}]}' -X DELETE http://localhost:8080/device/term
+修改
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region_device":[{"region_guid":"93d23c3f-8712-4d6c-b54f-726083bc1486","region_name":"xxxxx","table_device_guid":"271A213CCFDD44D8AB841F5718BC6A9A","device_name":"321654","gateway_id":"00000001007e170a","region_addr":"ff15::902e","device_addr":"fd04:bd3:80e8:3:215:8d00:8a:1d03"}]}' -X PUT http://localhost:8080/new/RegionDevice
+
+{"user_id":"12345667","table_region":[{"region_guid":"xxxxx","region_name":"one","region_switch":"01","region_value":"NULL","region_delay":"1000"}]}
+
+查询
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H  "http://localhost:8080/new/region?user_id=f1b6be25-8fac-49f4-8234-aece5af717d9&region_guid=86af533cb5ba4bfeb99d80f155cfb371&gateway_id=02158d00007e170a&start_time=2016-05-09 13:00:00&end_time=2016-05-09 19:00:00&type=history&size=360&region_name=y"
+
+curl -X GET -H "Content-Type: application/json" "http://localhost:8080/region?user_id=f1b6be25-8fac-49f4-8234-aece5af717d9&region_guid=86af533cb5ba4bfeb99d80f155cfb371&gateway_id=02158d00007e170a&start_time=2016-05-09 13:00:00&end_time=2016-05-09 19:00:00&type=history&size=360&region_name=y"
+
+
+添加区域 region_addr,
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_region":[{"region_guid":"fe1cf238-81f0-4712-a06b-227f13c9be0a","gateway_id":"02158d000052c779","table_device_guid":"271A213CCFDD44D8AB841F5718BC6A9A","region_addr":"ff15::902e","region_name":"xxxxx","device_addr":"fd04:bd3:80e8:3:215:8d00:8a:1d03","device_name":"123456"}]}' -X POST http://localhost:8080/new/addRegionDevice
+
+
+添加用户12345667
+curl -H "Content-Type: application/json" -d '{"user_id":"12345667","user_table":[{gateway_id":"00000001007e170a"}]}' -X POST http://localhost:8080/user
+
+添加用户12345667
+curl -H "Content-Type: application/json" -d '{"father_user":"12345667","user_name":"cccc","password":"123456","e_mail":"cccc@qq.com","phone":"12345678932","country":"86"}' -X POST "http://123.56.230.45:8088/user"
+
+//添加组
+curl -H "Content-Type: application/json" -d '{"user_id":"xxxxxxxxx","table_group":[{"gateway_id":"00000001007e170a","group_name":"啊啊啊啊"}]}' -X POST "http://123.56.230.45:8088/device/group"
+
+
+curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 1f1ad3e1-a8db-e6c0-2153-a4354f40d054" -d '{
+"private_recipe_id":"9f427b52-c89b-4703-a659-d00e3d07d797",
+"region_guid":"eadd53e6-967c-47cd-8759-6e8610ced13d",
+"status":"0"
+}' "http://73.231.41.102:8080/recipe/private_status"
