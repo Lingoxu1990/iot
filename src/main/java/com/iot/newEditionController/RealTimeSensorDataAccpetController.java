@@ -3,13 +3,16 @@ package com.iot.newEditionController;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.iot.exception.ParameterException;
 import com.iot.message.Message;
 import com.iot.message.MessageNoContent;
 import com.iot.newEditionService.RealTimeSensorDataAccpetService;
 import com.iot.newEditionService.RecipeService;
+import com.iot.pojo.AccountDataInfo;
 import com.iot.pojo.TableChannel;
 import com.iot.pojo.TableDevice;
 import com.iot.pojo.TableSensorRecord;
+import com.iot.service.AccountInfoService;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.sun.xml.internal.ws.api.model.MEP;
 import org.apache.log4j.Logger;
@@ -40,6 +43,8 @@ public class RealTimeSensorDataAccpetController {
 
     @Resource
     private RealTimeSensorDataAccpetService realTimeSensorDataAccpetService;
+    @Resource
+    private AccountInfoService accountInfoService;
 
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -200,4 +205,38 @@ public class RealTimeSensorDataAccpetController {
         messageNoContent.setMessage("channel replace success");
         return messageNoContent;
     }
+
+    @RequestMapping(value = "/upload/gatewayInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Object ModifyInitData(@RequestBody @JsonFormat AccountDataInfo accountDataInfo) {
+
+        String  accountId = accountDataInfo.getAccount_id();
+        String  gatewayId = accountDataInfo.getGateway_id();
+
+        if (gatewayId==null || "".equals(gatewayId)){
+            throw new ParameterException("-1","gatewayId does not exist");
+        }
+        if (accountId==null || "".equals(accountId)){
+            throw new ParameterException("-1","accountId does not exist");
+        }
+
+        try{
+            accountInfoService.removeBankData(accountId);
+
+            accountInfoService.updateData(accountDataInfo);
+
+        }catch (Exception e){
+            logger.debug(e.getMessage());
+            MessageNoContent messageNoContent = new MessageNoContent();
+            messageNoContent.setCode("-1");
+            messageNoContent.setMessage(e.getMessage());
+            return messageNoContent;
+        }
+        MessageNoContent messageNoContent = new MessageNoContent();
+        messageNoContent.setCode("0");
+        messageNoContent.setMessage("success");
+
+        return messageNoContent;
+    }
+
 }
