@@ -89,9 +89,6 @@ public class UserController {
         List<UserTable> list = userService.findChildUsers(user_id);
         UserTable userTable=userService.findUsers(user_id);
         if (list.size() == 0&&userTable==null) {
-//            message.setCode("0");
-//            message.setContent(new JSONArray());
-//            message.setMessage("No Result!");
             throw new BussinessException("0","No Result!");
         } else {
             JSONArray jlist = (JSONArray) JSONObject.toJSON(list);
@@ -101,7 +98,6 @@ public class UserController {
             message.setCode("0");
             message.setContent(jlist);
             message.setMessage("Search Success");
-
         }
         return message;
     }

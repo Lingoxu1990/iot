@@ -139,8 +139,6 @@ public class RecipeController {
 
         recipeService.recipePrivateStart(userId, regionGuid, dispathcer, privateRecipeId);
 
-
-
         MessageNoContent message = new MessageNoContent();
         message.setCode("0");
         message.setMessage("success");
@@ -230,9 +228,6 @@ public class RecipeController {
             throw new ParameterException("-1", "private_recipe_id does not exist");
 
         }
-
-
-
         PrivateRecipeIndex privateRecipeIndex = JSONObject.parseObject(param.toString(),PrivateRecipeIndex.class);
 
         recipeService.updateStatus(privateRecipeIndex);

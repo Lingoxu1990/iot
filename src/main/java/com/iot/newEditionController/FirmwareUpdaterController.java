@@ -88,37 +88,24 @@ public class FirmwareUpdaterController {
     public MessageNoContent firmwareUpdate(@RequestBody @JsonFormat UserGateway userGateway) throws IOException {
 
         MessageNoContent messageNoContent = new MessageNoContent();
-
         String gatewayId = userGateway.getGateway_id();
-
         if (gatewayId==null || "".equals(gatewayId)){
-
             messageNoContent.setCode("-1");
             messageNoContent.setMessage("Missing the param gateway");
             return messageNoContent;
         }
-
-
         String accountId = userGateway.getAccount_id();
-
         if (accountId==null || "".equals(accountId)){
-
             messageNoContent.setCode("-1");
             messageNoContent.setMessage("Missing the param account_id");
             return messageNoContent;
         }
-
         // 获取子网关对应的dispathcer的网关id
         DispatcherLocation dispatcherLocation = firmwareUpdaterService.selectByGatewayId(gatewayId);
-
         // 发送指令
         firmwareUpdaterService.sendByFwdGateway(accountId,dispatcherLocation);
-
-
-
         messageNoContent.setCode("0");
         messageNoContent.setMessage("the firmware update successfully!");
-
         return messageNoContent;
     }
 }

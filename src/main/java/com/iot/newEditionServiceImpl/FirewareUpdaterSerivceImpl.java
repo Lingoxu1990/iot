@@ -52,10 +52,9 @@ public class FirewareUpdaterSerivceImpl  implements FirmwareUpdaterService{
         outPutSocketMessage.setType("NULL");//填写“NULL”
 
         String sourceId = account_id + Param.WEBAPPID + String.valueOf(System.currentTimeMillis() / 1000000000);
-
         outPutSocketMessage.setMessage("update");//下发的具体数据（拼接后的字符串）
         outPutSocketMessage.setSourceID(sourceId);//消息发送者的ID（前8位与调度者地址相同）
-        outPutSocketMessage.setSql("");//配方操作指令 apply/cancel
+        outPutSocketMessage.setSql("");//
 
         JSONObject result = outPutSocketMessage.sendMessag(sourceId);
 
