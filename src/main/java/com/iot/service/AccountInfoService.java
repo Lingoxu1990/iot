@@ -13,4 +13,8 @@ public interface AccountInfoService {
 
     int updataAddrInfo(AccountDataInfo accountDataInfo);
 
+    int removeBankData(String accountId);
+
+    int updateData(AccountDataInfo accountDataInfo);
+
 }

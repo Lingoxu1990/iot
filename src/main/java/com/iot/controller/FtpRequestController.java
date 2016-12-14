@@ -4,6 +4,7 @@ package com.iot.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.iot.fileUtil.FileUtil;
 import com.iot.message.Message;
 import com.iot.pojo.AccountDataInfo;
@@ -40,7 +41,7 @@ public class FtpRequestController {
 
     /**
      * ftp将更新的文件上传至web后台所需调用的接口
-     * 调用com.iot.FileUtil.FileUtil,存储db文件,并触发同步事件
+     * 调用com.iot.fileUtil.fileUtil,存储db文件,并触发同步事件
      *
      * @param httpServletRequest
      * @return
@@ -173,6 +174,7 @@ public class FtpRequestController {
     }
 
     /**
+     * 该接口在ftp传输方式启用后 ，已弃用
      * ftp 扫描服务 修改用户文件信息 调用接口
      *
      * @param accountDataInfo
@@ -181,8 +183,6 @@ public class FtpRequestController {
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
     public Object ModifyInitData(@RequestBody @JsonFormat AccountDataInfo accountDataInfo) {
-
-
 
         Message message = new Message();
         int num = ftpService.updateByPrimaryKeySelective(accountDataInfo);
@@ -201,6 +201,7 @@ public class FtpRequestController {
     }
 
     /**
+     * 该接口在ftp传输方式启用后 ，已弃用
      * ftp扫描服务 在初始化用户数据的操作流程中,完成了删除web服务上的空数据后,调用该接口插入真实数据
      *
      * @param accountDataInfo
