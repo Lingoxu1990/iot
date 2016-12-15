@@ -12,7 +12,7 @@ public class test {
     public static final String GATEWAY="gateway";
 
     public static void main(String[] args) {
-        getDb("192.168.0.164",1214,"","C:\\Users\\Administrator\\Desktop","test.zip");
+        getDb("192.168.0.182",1214,"","C:\\Users\\Administrator\\Desktop","test.zip");
     }
     public static void getDb(String host,int port,String gatewayId,String savePath,String fileName){
         Socket socket = null;

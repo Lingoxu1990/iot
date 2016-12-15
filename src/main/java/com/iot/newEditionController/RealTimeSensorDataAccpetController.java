@@ -14,7 +14,6 @@ import com.iot.pojo.TableDevice;
 import com.iot.pojo.TableSensorRecord;
 import com.iot.service.AccountInfoService;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import com.sun.xml.internal.ws.api.model.MEP;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
