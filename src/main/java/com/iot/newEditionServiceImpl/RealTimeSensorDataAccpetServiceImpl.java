@@ -39,41 +39,35 @@ public class RealTimeSensorDataAccpetServiceImpl implements RealTimeSensorDataAc
 
     public int replaceMany(List<TableDevice> list){
 
-        int result=0;
-        for (TableDevice device :list) {
-            if(device.getAccount_id()==null || "".equals(device.getAccount_id())){
-                throw new ParameterException("-1","account_id does not exist");
-            }
-            if(device.getDevice_guid()==null || "".equals(device.getDevice_guid())){
-                throw new ParameterException("-1","device_guid does not exist");
-            }
-            if (device.getGateway_id()==null || "".equals(device.getGateway_id())){
-                throw new ParameterException("-1","gateway does not exist");
-            }
-            device.setId(UUID.randomUUID().toString());
-            tableDeviceMapper.deleteByGuidAndAccountId(device);
-            result+=tableDeviceMapper.insertSelective(device);
+        if (list!=null && list.size()!=0){
+            tableDeviceMapper.deleteByGatewayId(list.get(0));
         }
+        int result = tableDeviceMapper.insertMany(list);
+
         return result;
     }
 
     @Override
     public int replaceclassMany(List<TableChannel> list) {
-        int result=0;
-        for (TableChannel channel :list) {
-            if(channel.getAccount_id()==null || "".equals(channel.getAccount_id())){
-                throw new ParameterException("-1","account_id does not exist");
-            }
-            if(channel.getChannel_guid()==null || "".equals(channel.getChannel_guid())){
-                throw new ParameterException("-1","channel_guid does not exist");
-            }
-            if (channel.getGateway_id()==null || "".equals(channel.getGateway_id())){
-                throw new ParameterException("-1","gateway does not exist");
-            }
-            channel.setId(UUID.randomUUID().toString());
-            tableChannelMapper.deleteByGuidAndAccountId(channel);
-            result+=tableChannelMapper.insertSelective(channel);
+
+        if (list!=null && list.size()!=0){
+            tableChannelMapper.deleteByGatewayId(list.get(0));
         }
+        int result = tableChannelMapper.insertMany(list);
+
+        return result;
+    }
+
+    @Override
+    public int insertManyDevices(List<TableDevice> list) {
+
+        int result = tableDeviceMapper.insertMany(list);
+        return result;
+    }
+
+    @Override
+    public int insertManyClasses(List<TableChannel> list) {
+        int result = tableChannelMapper.insertMany(list);
         return result;
     }
 }

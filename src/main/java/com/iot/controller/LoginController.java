@@ -55,6 +55,7 @@ public class LoginController {
             while ((line = in.readLine()) != null) {
                 empJson += line;
             }
+            System.out.println(empJson);
             result = (JSONObject) JSONObject.parse(empJson);
         } catch (Exception e) {
             e.printStackTrace();

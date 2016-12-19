@@ -83,4 +83,6 @@ public interface TableDeviceMapper {
     int updateByDeviceName(TableDevice tableDevice);
 
     int deleteByGuidAndAccountId(TableDevice tableDevice);
+    int deleteByGatewayId(TableDevice tableDevice);
+    int insertMany(List<TableDevice> list);
 }

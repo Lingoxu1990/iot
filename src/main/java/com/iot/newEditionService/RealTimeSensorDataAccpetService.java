@@ -14,4 +14,6 @@ public interface RealTimeSensorDataAccpetService {
     int insertMany(List<TableSensorRecord> list);
     int replaceMany(List<TableDevice> list);
     int replaceclassMany(List<TableChannel> list);
+    int insertManyDevices(List<TableDevice> list);
+    int insertManyClasses(List<TableChannel> list);
 }

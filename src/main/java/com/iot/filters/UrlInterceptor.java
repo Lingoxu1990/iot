@@ -32,6 +32,8 @@ public class UrlInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUri = request.getRequestURI();
+        System.out.println("uri = "+requestUri);
+        System.out.println("url = "+request.getRequestURL());
         //String contextPath = request.getContextPath();
         //String url = request.getScheme()+"://"+request.getHeader("host")+request.getRequestURI();
 
@@ -173,6 +175,7 @@ public class UrlInterceptor implements HandlerInterceptor {
 
             if (!keys.equals("")&&values.toUpperCase().equals(request.getMethod())){
                 param=(JSONObject) ParamUtils.getJsonObjectFromStream(request.getInputStream());
+                System.out.println(param);
                 userId=(String) param.get("user_id");
             }else {
                 return true;

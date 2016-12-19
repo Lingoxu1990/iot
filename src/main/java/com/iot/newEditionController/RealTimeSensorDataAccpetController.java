@@ -143,22 +143,48 @@ public class RealTimeSensorDataAccpetController {
         while ((line = in.readLine()) != null) {
             empline += line;
         }
-        List<TableDevice>  tableDeviceList = JSONArray.parseArray(empline, TableDevice.class);
-        int num=0;
-        try{
-            num = realTimeSensorDataAccpetService.replaceMany(tableDeviceList);
-        }catch (Exception e){
-            e.printStackTrace();
-            message.setCode("-1");
-            message.setMessage("device replcae error");
-            message.setContent(e.getMessage());
-            return message;
+        JSONObject jsonObject = JSONObject.parseObject(empline);
+        String index = jsonObject.getString("index");
+        JSONArray data = jsonObject.getJSONArray("data");
+        List<TableDevice>  tableDeviceList = JSONArray.parseArray(data.toJSONString(), TableDevice.class);
+        for (TableDevice device : tableDeviceList) {
+            device.setId(UUID.randomUUID().toString());
         }
-        if (num!=(tableDeviceList.size())){
-            message.setCode("-1");
-            message.setMessage("device execute error");
-            message.setContent("this operation is not executed as expected.");
-            return message;
+
+        if (Integer.parseInt(index)==1){
+            int num=0;
+            try{
+                num = realTimeSensorDataAccpetService.replaceMany(tableDeviceList);
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setCode("-1");
+                message.setMessage("device replcae error");
+                message.setContent(e.getMessage());
+                return message;
+            }
+            if (num!=(tableDeviceList.size())){
+                message.setCode("-1");
+                message.setMessage("device execute error");
+                message.setContent("this operation is not executed as expected.");
+                return message;
+            }
+        }else {
+            int num=0;
+            try{
+                num = realTimeSensorDataAccpetService.insertManyDevices(tableDeviceList);
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setCode("-1");
+                message.setMessage("device replcae error");
+                message.setContent(e.getMessage());
+                return message;
+            }
+            if (num!=(tableDeviceList.size())){
+                message.setCode("-1");
+                message.setMessage("device execute error");
+                message.setContent("this operation is not executed as expected.");
+                return message;
+            }
         }
         MessageNoContent messageNoContent = new MessageNoContent();
         messageNoContent.setCode("0");
@@ -175,30 +201,51 @@ public class RealTimeSensorDataAccpetController {
         while ((line = in.readLine()) != null) {
             empline += line;
         }
-        System.out.println(empline);
-        List<TableChannel>  tableDeviceList = JSONArray.parseArray(empline, TableChannel.class);
+        JSONObject jsonObject = JSONObject.parseObject(empline);
+        String index = jsonObject.getString("index");
+        JSONArray data = jsonObject.getJSONArray("data");
+        List<TableChannel>  tableDeviceList = JSONArray.parseArray(data.toJSONString(), TableChannel.class);
+        for (TableChannel channel : tableDeviceList) {
+            channel.setId(UUID.randomUUID().toString());
+        }
+        if (Integer.parseInt(index)==1){
+            int num=0;
 
-        for (TableChannel t:tableDeviceList) {
-            System.out.println(t.toString());
+            try{
+                num = realTimeSensorDataAccpetService.replaceclassMany(tableDeviceList);
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setCode("-1");
+                message.setMessage("channel replcae error");
+                message.setContent(e.getMessage());
+                return message;
+            }
+            if (num!=(tableDeviceList.size())){
+                message.setCode("-1");
+                message.setMessage("channel execute error");
+                message.setContent("this operation is not executed as expected.");
+                return message;
+            }
+        }else {
+            int num=0;
+
+            try{
+                num = realTimeSensorDataAccpetService.insertManyClasses(tableDeviceList);
+            }catch (Exception e){
+                e.printStackTrace();
+                message.setCode("-1");
+                message.setMessage("channel replcae error");
+                message.setContent(e.getMessage());
+                return message;
+            }
+            if (num!=(tableDeviceList.size())){
+                message.setCode("-1");
+                message.setMessage("channel execute error");
+                message.setContent("this operation is not executed as expected.");
+                return message;
+            }
         }
 
-        int num=0;
-
-        try{
-            num = realTimeSensorDataAccpetService.replaceclassMany(tableDeviceList);
-        }catch (Exception e){
-            e.printStackTrace();
-            message.setCode("-1");
-            message.setMessage("channel replcae error");
-            message.setContent(e.getMessage());
-            return message;
-        }
-        if (num!=(tableDeviceList.size())){
-            message.setCode("-1");
-            message.setMessage("channel execute error");
-            message.setContent("this operation is not executed as expected.");
-            return message;
-        }
         MessageNoContent messageNoContent = new MessageNoContent();
         messageNoContent.setCode("0");
         messageNoContent.setMessage("channel replace success");

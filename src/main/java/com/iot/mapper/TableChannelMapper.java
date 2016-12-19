@@ -66,5 +66,7 @@ public interface TableChannelMapper {
     TableChannel selectByDeselectByChannelGuidAndAccount_idAndGateway_id(TableChannel record);
 
     int deleteByGuidAndAccountId(TableChannel record);
+    int deleteByGatewayId(TableChannel record);
+    int insertMany(List<TableChannel> list);
 
 }

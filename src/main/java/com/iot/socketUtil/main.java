@@ -36,11 +36,11 @@ public class main {
         }
         OutPutSocketMessage outPutSocketMessage = new OutPutSocketMessage();
         outPutSocketMessage.setPackegType(2);
-        outPutSocketMessage.setDestinationID("000000011234asdf");
+        outPutSocketMessage.setDestinationID("00000002007e1722");
         outPutSocketMessage.setType("table_region_device");
-        outPutSocketMessage.setMessage("applyRecipe");
-        outPutSocketMessage.setSourceID("0000000112345677");
-        outPutSocketMessage.setSql("xxxxxxxxx,d6e20855-d14d-40ff-a7f6-533caffc256b,000000011234asdf,3bdbc110-dd90-4812-b473-470f026b61bb");
+        outPutSocketMessage.setMessage("table_region_device");
+        outPutSocketMessage.setSourceID("00000002007e1482");
+        outPutSocketMessage.setSql(sql);
 
         byte[] message = outPutSocketMessage.getbytes();
 
@@ -52,7 +52,7 @@ public class main {
         jsonObject.put("Type", "  ");
         jsonObject.put("Message", "*:jennet");
         jsonObject.put("Status", 1);
-        jsonObject.put("SourceID", "0000000112345677");
+        jsonObject.put("SourceID", "00000002007e1482");
         jsonObject.put("List", new JSONArray());
         jsonObject.put("Command", "login");
 
@@ -105,7 +105,8 @@ public class main {
 //
 //        JSONObject j= singoTest("insert into table_region_device (region_device_guid,region_guid,region_addr,region_name,table_device_guid,gateway_id,device_addr,device_name,channel_class,channel_guid,channel_name,channel_type,channel_bit_num) values('123456789',' baf57091fc9a47e4becd64f17903f52e','ff15::9037’,'123','1110D337583C4E18B306368E84AE9639','02158d00007e170a','sensor_addr','test_sensor_name','channel_class','channel_guid','channel_name','chanel_type','channel_bit_num');");
 //        JSONObject j = singoTest("DELETE FROM table_region_device WHERE device_addr='fd04:bd3:80e8:3:215:8d00:35:e3a9' AND region_addr='ff15::90bc'");
-        JSONObject j = singoTest("applyRecipe");
+//        JSONObject j = singoTest("applyRecipe");
+        JSONObject j = singoTest("select * from table_device");
 
     }
 

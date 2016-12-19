@@ -276,4 +276,32 @@
     delete from table_channel
     where channel_guid = #{channel_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
   </delete>
+
+  <delete id="deleteByGatewayId" parameterType="com.iot.pojo.TableChannel">
+    delete from table_channel
+    where gateway_id = #{gateway_id,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertMany" parameterType="ArrayList">
+    insert into table_channel( id, channel_guid, table_device_guid, device_name, channel_class, channel_number,
+    channel_name, channel_type, channel_bit_num, channel_in_out, account_id,gateway_id)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.id},
+      #{item.channel_guid},
+      #{item.table_device_guid},
+      #{item.device_name},
+      #{item.channel_class},
+      #{item.channel_number},
+      #{item.channel_name},
+      #{item.channel_type},
+      #{item.channel_bit_num},
+      #{item.channel_in_out},
+      #{item.account_id},
+      #{item.gateway_id}
+      )
+    </foreach>
+  </insert>
+
+
 </mapper>

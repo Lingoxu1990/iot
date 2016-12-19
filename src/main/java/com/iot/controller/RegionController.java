@@ -100,6 +100,7 @@ public class RegionController {
 
         //// TODO: 16/4/5 获取本次操作对应的子网关 以及用户的sourceId
         JSONObject jsonObject = ParamUtils.getAttributess(httpServletRequest);
+        System.out.println(jsonObject);
         Message message = regionService.modifyRegion(jsonObject, "158d00007e1595", "1234567802345677", -1);
         return message;
     }

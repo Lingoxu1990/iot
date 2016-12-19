@@ -1,5 +1,7 @@
 package com.iot.newEditionController;
 
+import com.alibaba.fastjson.JSONObject;
+import com.iot.message.Message;
 import com.iot.message.MessageNoContent;
 import com.iot.newEditionService.RecipeService;
 import com.iot.newEditionService.SyncUycTimeService;
@@ -53,6 +55,23 @@ public class SyncUtcTimeController {
 
 
         return messageNoContent;
+
+    }
+
+    @RequestMapping(value = "/timestamp", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getLocalTime() throws Exception {
+
+
+        JSONObject result = new JSONObject();
+        result.put("contentEncrypt","");
+        result.put("content",System.currentTimeMillis()/1000);
+        result.put("message","请求成功");
+        result.put("code",0);
+
+
+
+        return result;
 
     }
 

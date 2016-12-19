@@ -483,4 +483,32 @@
     where device_guid = #{device_guid,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR} AND gateway_id = #{gateway_id,jdbcType=VARCHAR}
   </delete>
 
+  <delete id="deleteByGatewayId" parameterType="com.iot.pojo.TableDevice">
+    delete from table_device
+    where gateway_id = #{gateway_id,jdbcType=VARCHAR} AND account_id = #{account_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertMany" parameterType="ArrayList">
+    insert into table_device( id, device_guid, gateway_id, device_addr, device_name, device_id, device_type, device_valid,
+    device_switch, device_value, device_delay, device_register_type, account_id, region_bunding)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.id},
+      #{item.device_guid},
+      #{item.gateway_id},
+      #{item.device_addr},
+      #{item.device_name},
+      #{item.device_id},
+      #{item.device_type},
+      #{item.device_valid},
+      #{item.device_switch},
+      #{item.device_value},
+      #{item.device_delay},
+      #{item.device_register_type},
+      #{item.account_id},
+      #{item.region_bunding}
+      )
+    </foreach>
+  </insert>
+
 </mapper>
