@@ -867,14 +867,54 @@ public class SensorDataController {
 
             for (int j = 0; j <Meta.size() ; j++) {
                 JSONObject jj= Meta.get(j);
-                carbon_Dioxide=Float.parseFloat((String) jj.get("carbon_Dioxide"));
-                substrate_PH=Float.parseFloat((String) jj.get("substrate_PH"));
-                substrate_Conductivity=Float.parseFloat((String) jj.get("substrate_Conductivity"));
-                substrate_Temperature=Float.parseFloat((String) jj.get("substrate_Temperature"));
-                air_Temperature=Float.parseFloat((String) jj.get("air_Temperature"));
-                ppfd=Float.parseFloat((String) jj.get("ppfd"));
-                liquid_PH=Float.parseFloat((String) jj.get("liquid_PH"));
-                substrate_Humidity=Float.parseFloat((String) jj.get("substrate_Humidity"));
+//                carbon_Dioxide=Float.parseFloat((String) jj.get("carbon_Dioxide"));
+                if (jj.get("carbon_Dioxide").toString().toString().equals("")){
+                    carbon_Dioxide=0;
+                }else {
+                    carbon_Dioxide=Float.parseFloat( jj.get("carbon_Dioxide").toString());
+                }
+//                substrate_PH=Float.parseFloat((String) jj.get("substrate_PH"));
+                if (jj.get("substrate_PH").toString().toString().equals("")){
+                    substrate_PH=0;
+                }else {
+                    substrate_PH=Float.parseFloat( jj.get("substrate_PH").toString());
+                }
+//                substrate_Conductivity=Float.parseFloat((String) jj.get("substrate_Conductivity"));
+                if (jj.get("substrate_Conductivity").toString().toString().equals("")){
+                    substrate_Conductivity=0;
+                }else {
+                    substrate_Conductivity=Float.parseFloat( jj.get("substrate_Conductivity").toString());
+                }
+//                substrate_Temperature=Float.parseFloat((String) jj.get("substrate_Temperature"));
+                if (jj.get("substrate_Temperature").toString().toString().equals("")){
+                    substrate_Temperature=0;
+                }else {
+                    substrate_Temperature=Float.parseFloat( jj.get("substrate_Temperature").toString());
+                }
+//                air_Temperature=Float.parseFloat((String) jj.get("air_Temperature"));
+                if (jj.get("air_Temperature").toString().toString().equals("")){
+                    air_Temperature=0;
+                }else {
+                    air_Temperature=Float.parseFloat( jj.get("air_Temperature").toString());
+                }
+//                ppfd=Float.parseFloat((String) jj.get("ppfd"));
+                if (jj.get("ppfd").toString().toString().equals("")){
+                    ppfd=0;
+                }else {
+                    ppfd=Float.parseFloat( jj.get("ppfd").toString());
+                }
+//                liquid_PH=Float.parseFloat((String) jj.get("liquid_PH"));
+                if (jj.get("liquid_PH").toString().toString().equals("")){
+                    liquid_PH=0;
+                }else {
+                    liquid_PH=Float.parseFloat( jj.get("liquid_PH").toString());
+                }
+//                substrate_Humidity=Float.parseFloat((String) jj.get("substrate_Humidity"));
+                if (jj.get("substrate_Humidity").toString().toString().equals("")){
+                    substrate_Humidity=0;
+                }else {
+                    substrate_Humidity=Float.parseFloat( jj.get("substrate_Humidity").toString());
+                }
                 if (jj.get("liquid_DOC").toString().toString().equals("")){
                     liquid_DOC=0;
                 }else {
@@ -886,14 +926,24 @@ public class SensorDataController {
                     liquid_Conductivity=Float.parseFloat((String) jj.get("liquid_Conductivity"));
                 }
 
-                air_Humidity=Float.parseFloat((String) jj.get("air_Humidity"));
+//                air_Humidity=Float.parseFloat((String) jj.get("air_Humidity"));
+                if (jj.get("air_Humidity").toString().toString().equals("")){
+                    air_Humidity=0;
+                }else {
+                    air_Humidity=Float.parseFloat((String) jj.get("air_Humidity"));
+                }
                 if (jj.get("substrate_DOC").toString().toString().equals("")){
                     substrate_DOC=0;
                 }else {
                     substrate_DOC=Float.parseFloat((String) jj.get("substrate_DOC"));
                 }
 
-                illuminance=Float.parseFloat((String) jj.get("illuminance"));
+//                illuminance=Float.parseFloat((String) jj.get("illuminance"));
+                if (jj.get("illuminance").toString().toString().equals("")){
+                    illuminance=0;
+                }else {
+                    illuminance=Float.parseFloat((String) jj.get("illuminance"));
+                }
 
                 timess=(String) jj.get("record_time");
 
